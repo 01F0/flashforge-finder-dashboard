@@ -9,9 +9,9 @@ A simple dashboard for FlashForge Finder printers. Uses a flask backend api to c
 
 2. Install the node modules:
 
-  npm install
+`npm install`
 
 3. Start the development server:
 
-  npm start
+`npm start`
 
