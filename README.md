@@ -1,5 +1,5 @@
 # flashforge-finder-dashboard
-A simple dashboard for FlashForge Finder printers. Uses a flask backend api to communicate with the meters.
+A simple dashboard for FlashForge Finder printers. Uses a flask backend api to communicate with the printers.
 
 ![Dashboard example image](https://github.com/01F0/flashforge-finder-dashboard/blob/master/example.png)
 
