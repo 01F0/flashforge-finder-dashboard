@@ -7,7 +7,7 @@ function PrintProgress (props) {
     <div>
       <ProgressBar active bsStyle="success"
           now={props.props.PercentageCompleted}
-          label={"Progress: " + props.props.PercentageCompleted + "%"}/>
+          label={props.props.PercentageCompleted + "%"}/>
     </div>
   )
 }

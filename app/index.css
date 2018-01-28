@@ -21,3 +21,7 @@
   grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
   grid-gap: 20em;
 }
+
+.connect-button {
+  margin-left:125px;
+}

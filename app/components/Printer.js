@@ -6,7 +6,7 @@ var PrinterStatus = require('../components/PrinterStatus')
 var PrintProgress = require('../components/PrintProgress')
 var PrinterTemperature = require('../components/PrinterTemperature')
 var PropTypes = require('prop-types');
-import { PageHeader } from 'react-bootstrap';
+import { PageHeader, Button, Glyphicon} from 'react-bootstrap';
 
 class Printer extends React.Component {
 
@@ -21,14 +21,16 @@ class Printer extends React.Component {
       info : null,
       status : null,
       progress : null,
-      temp : null
+      temp : null,
+      connected : false
     };
+
+    this.handleConnect = this.handleConnect.bind(this);
+    this.pollingMethod = this.pollingMethod.bind(this);
   }
 
-  componentDidMount() {
-
-  this.interval = window.setInterval(function () {
-
+  // TODO: Add mobx store for these properties and move the api calls.
+  pollingMethod() {
       api.getTemp(this.props.ip_address)
         .then(function (data) {
           this.setState(() => {
@@ -65,9 +67,29 @@ class Printer extends React.Component {
               }});
       }.bind(this));
 
-    }.bind(this), 2000);
+    }
+
+  startPolling() {
+    this.interval = window.setInterval(this.pollingMethod, 5000);
   }
 
+  componentDidMount() {
+    this.pollingMethod();
+  }
+
+  handleConnect() {
+    this.setState( {
+      connected : !this.state.connected
+    });
+
+     if (this.state.connected) {
+      this.interval = window.clearInterval(this.interval);
+    }
+    else {
+      this.startPolling();
+    }
+
+  }
 
   render() {
     if (!this.state.info || !this.state.status || !this.state.progress || !this.state.temp) {
@@ -79,10 +101,17 @@ class Printer extends React.Component {
     return (
       <div className='container'>
        <PageHeader>{this.props.name} <small>({this.props.ip_address})</small></PageHeader>
-        <PrinterStatus props={this.state.status}/>
-        <PrinterTemperature props={this.state.temp}/>
-        <PrintProgress props={this.state.progress}/>
+          <div style={{"opacity": this.state.connected ? 1 : 0.3}}>
+          <PrinterStatus props={this.state.status}/>
+          <PrinterTemperature props={this.state.temp}/>
+          <PrintProgress props={this.state.progress}/>
+        </div>
         <PrinterInfo props={this.state.info}/>
+        <div className='connect-button'>
+          <Button bsStyle={this.state.connected ? "warning" : "success"} onClick={this.handleConnect}>
+            {!this.state.connected && <strong> Connect </strong>} {this.state.connected && <strong> Disconnect </strong>}
+          </Button>
+        </div>
       </div>)
     }
   }
