@@ -1,7 +1,6 @@
-FROM node:latest
-ENV NODE_ENV=production
-WORKDIR /app
-COPY ["package.json", "package-lock.json*", "./"]
-RUN npm install --production
-COPY . .
-CMD [ "node", "server.js" ]
+FROM node:lts-alpine3.13
+ENV NODE_ENV production
+WORKDIR /usr/src/app
+COPY . /usr/src/app
+RUN npm ci --only=production
+CMD "npm" "start"
