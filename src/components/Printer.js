@@ -1,6 +1,7 @@
 import React from 'react';
 import { getTemp, getStatus, getProgress, getInfo } from '../utils/api';
 import PrinterInfo from './PrinterInfo';
+import PrinterCamera from './PrinterCamera';
 import PrinterStatus from './PrinterStatus';
 import PrintProgress from './PrintProgress';
 import PrinterTemperature from './PrinterTemperature';
@@ -132,28 +133,33 @@ export default class Printer extends React.Component
 
     return (
       <div className='container'>
-        <div style={{"opacity": this.state.connected ? 1 : 0.3}}>
-        <h1 className='container-item'>{this.props.name}</h1>
-        <h5 className='container-item'>({this.props.ip_address})</h5>
-        <div className='container-item' >
-          {this.state.status ? <PrinterStatus props={this.state.status} /> : <Spinner animation="border" role="status" size="sm" />}
+        <div style={{ "opacity": this.state.connected ? 1 : 0.3 }}>
+          <h1 className='container-item'>{this.props.name}</h1>
+          <h5 className='container-item'>({this.props.ip_address})</h5>
           <div className='container-item' >
-            <b>Temp</b>: {this.state.temp ? <PrinterTemperature props={this.state.temp} /> : <Spinner animation="border" role="status" size="sm" />}
+            {this.state.status ? <PrinterStatus props={this.state.status} /> : <Spinner animation="border" role="status" size="sm" />}
+            <div className='container-item' >
+              <b>Temp</b>: {this.state.temp ? <PrinterTemperature props={this.state.temp} /> : <Spinner animation="border" role="status" size="sm" />}
+            </div>
+            <div className='container-item' >
+              <b>Progress</b>: {this.state.progress ? <PrintProgress props={this.state.progress} /> : <Spinner animation="border" role="status" size="sm" />}
+            </div>
           </div>
-          <div className='container-item' >
-            <b>Progress</b>: {this.state.progress ? <PrintProgress props={this.state.progress} /> : <Spinner animation="border" role="status" size="sm" />}
+          <div className='container-item'>
+            {this.state.info ? <PrinterInfo props={this.state.info} /> : <Spinner animation="border" role="status" size="sm" />}
           </div>
-        </div>
-        <div className='container-item'>
-          {this.state.info ? <PrinterInfo props={this.state.info} /> : <Spinner animation="border" role="status" size="sm" />}
-        </div>
         </div>
         <div className='container-item'>
           <Button variant={this.state.connected ? "warning" : "success"} onClick={this.handleConnect}>
             {!this.state.connected && <strong> Connect </strong>} {this.state.connected && <strong> Disconnect </strong>}
           </Button>
         </div>
-        
+        {this.props.camera_ws_url &&
+          <div className='container-item' >
+            <PrinterCamera camera_ws_url={this.props.camera_ws_url} />
+          </div>
+        }
+
       </div>)
   }
 }
