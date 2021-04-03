@@ -1,0 +1,29 @@
+.container {
+    padding: 20px;
+    width: 300px;
+}
+
+.container-item {
+    padding-top: 20px;
+    width: 300px;
+}
+
+.inlinelist {
+    padding-right: 2px;
+    padding-left: 2px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    list-style: none;
+    padding-bottom: 5px,
+}
+
+.parent-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    grid-gap: 20em;
+}
+
+.connect-button {
+    margin-left: 125px;
+}
