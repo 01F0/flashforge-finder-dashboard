@@ -142,7 +142,7 @@ export default class Printer extends React.Component
               <b>Temp</b>: {this.state.temp ? <PrinterTemperature props={this.state.temp} /> : <Spinner animation="border" role="status" size="sm" />}
             </div>
             <div className='container-item' >
-              <b>Progress</b>: {this.state.progress ? <PrintProgress props={this.state.progress} /> : <Spinner animation="border" role="status" size="sm" />}
+              <b>Progress</b>: {this.state.progress ? <PrintProgress percentage_completed={this.state.progress.PercentageCompleted} /> : <Spinner animation="border" role="status" size="sm" />}
             </div>
           </div>
           <div className='container-item'>

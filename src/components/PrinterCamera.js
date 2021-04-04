@@ -12,8 +12,6 @@ export default class PrinterCamera extends React.Component
 
         this.props = props;
 
-        this.myRef = React.createRef();
-
         this.state = {
             data: null
         };

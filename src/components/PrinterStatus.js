@@ -4,28 +4,34 @@ export default function PrinterStatus(props)
 {
   var machineStatus = ""
   var headStatus = ""
+
   if (props.props.MachineStatus === "BUILDING_FROM_SD")
   {
     machineStatus = "Building from SD card 💾"
   }
-
-  if (props.props.MachineStatus === "READY")
+  else if (props.props.MachineStatus === "READY")
   {
     machineStatus = "Ready ✔"
   }
+  else
+  {
+    // Not sure what the other states are at the moment
+    headStatus = "🤔"
+  }
+
 
   if (props.props.MoveMode === "READY")
   {
     headStatus = "Ready ✔"
   }
-
-  if (props.props.MoveMode === "MOVING")
+  else if (props.props.MoveMode === "MOVING")
   {
     headStatus = "Moving 🏃‍♀️"
   }
   else
   {
-    headStatus = machineStatus;
+    // Not sure what the other states are at the moment
+    headStatus = "🤔"
   }
 
   return (
