@@ -7,15 +7,23 @@ A simple dashboard for FlashForge Finder printers. Uses a flask backend api to c
 
 1. Make sure you have the [Backend](https://github.com/01F0/flashforge-finder-api) running first.
 
-2. Set the backend URL in the **.env** file
+2. Set the backend URL in the **.env** file or create a **.env.local** file.
 
-3. Add your printers to the **index.js** file
+3. Add your printers to the **index.js** file:
 
-4. Install the node modules:
+    `<Printer ip_address='192.168.1.134' name='Fiona'/>`. 
 
-`npm install`
+4. If you have a camera server you can add a socket as a parameter to 
 
-5. Start the development server:
+    `<Printer ip_address='192.168.1.134' camera_ws_url='ws://192.168.1.199:8000/websocket' name='Fiona'/>`. 
 
-`npm start`
+    This camera server was used during development: https://github.com/patrickfuller/camp
+
+5. Install the node modules:
+
+    `npm install`
+
+6. Start the development server:
+
+    `npm start`
 
