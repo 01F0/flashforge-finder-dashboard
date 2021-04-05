@@ -43,15 +43,18 @@ export default class PrintProgress extends React.Component
         <ProgressBar ref={this.elementReference} variant="success"
           now={this.props.percentage_completed}
           label={this.props.percentage_completed + "%"}>
-
-          {this.props.percentage_completed > 98 &&
-            <Confetti width={2000} height={2000} numberOfPieces='20' confettiSource={{
-              w: this.state.w / 2,
-              h: this.state.h / 2,
-              x: this.state.x,
-              y: this.state.y,
-            }} />}
         </ProgressBar>
+
+        {this.props.percentage_completed === 100 &&
+            <Confetti width={2000} height={2000} numberOfPieces='50' 
+            initialVelocityX={{min: 0, max: 0}} 
+            gravity={0.1}
+            confettiSource={{
+              w: this.state.w,
+              h: this.state.h,
+              x: this.state.x,
+              y: 0,
+            }} />}
 
       </div>
     )
